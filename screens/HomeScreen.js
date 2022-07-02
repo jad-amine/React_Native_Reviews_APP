@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./Home";
-import Reviews from "./Reviews";
+import Review from "./Review";
 
 const stack = createNativeStackNavigator();
 
@@ -14,7 +14,7 @@ const HomeScreen = () => {
         component={Home}
         options={{ headerShown: false }}
       />
-      <stack.Screen name="Reviews" component={Reviews} />
+      <stack.Screen name="Review" component={Review} />
     </stack.Navigator>
   );
 };

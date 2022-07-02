@@ -19,6 +19,7 @@ export default function App() {
           headerTitle: "GameZone",
           headerTitleAlign: "center",
           headerTintColor: "white",
+          headerTitleStyle: { fontSize: 30, fontWeight: "bold" },
           headerBackground: () => (
             <Image
               source={require("./assets/background.png")}
