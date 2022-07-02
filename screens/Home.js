@@ -9,6 +9,7 @@ import {
   View,
   StyleSheet,
 } from "react-native";
+import Form from "../components/Form";
 import { globalStyles } from "../styles/global";
 
 const Home = ({ navigation }) => {
@@ -33,12 +34,21 @@ const Home = ({ navigation }) => {
       key: "3",
     },
   ]);
+
+  const saveReview = (review) => {
+    review.key = Math.random() * 100;
+    setReviews([...reviews, review]);
+    setModalVisible(false);
+  };
   return (
     <View style={globalStyles.container}>
       <FlatList
         data={reviews}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => navigation.navigate("Review", item)}>
+          <TouchableOpacity
+            style={styles.title}
+            onPress={() => navigation.navigate("Review", item)}
+          >
             <Text style={globalStyles.textTitle}>{item.title}</Text>
           </TouchableOpacity>
         )}
@@ -48,27 +58,16 @@ const Home = ({ navigation }) => {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          // Alert.alert("Modal has been closed.");
           setModalVisible(!modalVisible);
         }}
       >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable>
-          </View>
-        </View>
+        <Form saveReview={saveReview} setModalVisible={setModalVisible} />
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
         onPress={() => setModalVisible(true)}
       >
-        <Text style={styles.textStyle}>Show Modal</Text>
+        <Text style={styles.textStyle}>Add Review</Text>
       </Pressable>
     </View>
   );
@@ -117,5 +116,13 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+  },
+  title: {
+    backgroundColor: "#add",
+    padding: 10,
+    margin: 6,
+    borderRadius: 5,
+    borderBottomColor: "gray",
+    borderBottomWidth: 1,
   },
 });
